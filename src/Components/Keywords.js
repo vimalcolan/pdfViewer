@@ -82,7 +82,7 @@ export const pdfKeywords={
             }
         }, 
         {
-            "value": "s 24A of the Limitation Act (Cap 163, 1996 Rev Ed)",
+            "value": "s 24A of the Limitation Act",
             "confidence_score": 99,
             "position": {
                 "boundingRect": [{
