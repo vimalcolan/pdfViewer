@@ -6,7 +6,8 @@ export const pdfKeywords={
         "varname": "legislative_tags",
         "label": "Legislative Tags",
         "id": 0,
-        "values": [{
+        "values": [
+            {
             "value": "s 24A of Limitation Act",
             "confidence_score": 99,
             "position": {
@@ -27,7 +28,8 @@ export const pdfKeywords={
                 }],
                 "pageNumber": 1
             }
-        }, {
+        },
+         {
             "value": "B/L Act",
             "confidence_score": 99,
             "position": {
@@ -41,7 +43,8 @@ export const pdfKeywords={
                 }],
                 "pageNumber": 3
             }
-        }, {
+        },
+         {
             "value": "under the Land Titles (Strata) Act",
             "confidence_score": 99,
             "position": {
@@ -55,7 +58,8 @@ export const pdfKeywords={
                 }],
                 "pageNumber": 10
             }
-        }, {
+        },
+         {
             "value": "bill of lading",
             "confidence_score": 95,
             "position": {
@@ -76,7 +80,8 @@ export const pdfKeywords={
                 }],
                 "pageNumber": 12
             }
-        }, {
+        }, 
+        {
             "value": "s 24A of the Limitation Act (Cap 163, 1996 Rev Ed)",
             "confidence_score": 99,
             "position": {

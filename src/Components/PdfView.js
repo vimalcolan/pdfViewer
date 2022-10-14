@@ -1,4 +1,4 @@
-import React,{ useEffect, useState} from 'react'
+import React,{ useEffect, useState,useRef} from 'react'
 import { Document, Page } from "react-pdf";
 import { Worker } from '@react-pdf-viewer/core';
 import { Viewer } from '@react-pdf-viewer/core';
@@ -13,6 +13,7 @@ const PdfView = ({pdf}) => {
     const[pdfFile,setPdfFile]=useState(null);
     const[pageNumber,setPageNumber]=useState(1);
     const[keywordsList,setKeywordsList]=useState([]);
+    const[markState,setMarkState]=useState(0);
     useEffect(()=>{
         setKeywordsList(pdfKeywords.response.values);
     },[])
@@ -32,23 +33,47 @@ const PdfView = ({pdf}) => {
     
       function nextPage() {
         changePage(1);
-      }
-      var pdfDOc=document.getElementsByTagName("section")
-      var pdfData=document.getElementsByTagName("span");
+      };
+     
   
-      var found=[];
-      var val="s 24A of Limitation Act"
+      // var found=[];
+      // var val="s 24A of Limitation Act"
+    //   function getPos(el) {
+    //     for (var lx=0, ly=0;
+    //          el != null;
+    //          lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
+    //     return {x: lx,y: ly};
+    // }
     const handleClick=(data)=>{
         console.log("keyword",data);
-        for (var i = 0; i < pdfData.length; i++) {  
-            if (pdfData[i].innerText == val) {
-              found.push(pdfData[i].innerText);
-          
-            }
+        let text=data;
+        let pdfData=document.getElementById("pdf-view");
+        text=text.replace(/[.*+?^${}()|[\]\\]/g,"\\$7");
+        let pattern=new RegExp(`${text}`,"gi");
+        pdfData.innerHTML=pdfData.textContent.replace(pattern,match=>`<mark>${match}</mark>`);
+        var marked=document.getElementsByTagName("mark");
+        console.log(marked.length);
+       
+        for (var i = 0; i < marked.length; i++) {  
+            var rect = marked[i].getBoundingClientRect();
+         console.log(rect.top, rect.left);
           }
-      
+          function scrollFirst(){
+            return {
+              // left: marked[0].getBoundingClientRect().left + window.scrollX,
+              top: marked[0].getBoundingClientRect().top + window.scrollY
+            };
+          }
+     scrollFirst();
     }
-    console.log(found);
+   
+    const handleNext=()=>{
+      setMarkState(markState+1);
+      console.log("ok",markState);
+
+
+    }
+    // console.log(found);
              
    
   return (
@@ -71,7 +96,8 @@ const PdfView = ({pdf}) => {
             </div>
         </div>
         <div className='col-12 col-md-8 col-lg-9'>
-            <section className='pdf-view'>
+          <button className='btn btn-warning' onClick={handleNext}>next</button>
+            <section id='pdf-view'>
              
                
                     <div>
